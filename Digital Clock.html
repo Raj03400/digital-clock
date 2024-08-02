@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Clock</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(
+          to right top,
+          #051937,
+          #004d7a,
+          #008793,
+          #00bf72,
+          #a8eb12
+        )
+        no-repeat;
+      font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .clock-container {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 20px 40px;
+      text-align: center;
+    }
+
+    .date {
+      font-size: 18px;
+      color: #eee;
+      margin-bottom: 10px;
+    }
+
+    .time {
+      font-size: 32px;
+      color: #eee;
+      font-weight: bold;
+    }
+  </style>
+
+  <body>
+    <div class="clock-container">
+      <p class="date">Hello Date</p>
+      <p class="time">Hello Time</p>
+    </div>
+    <!-- <button>Click Me To Show The Time</button> -->
+
+    <script>
+      // const btn = document.getElementsByTagName("button")[0]
+      window.addEventListener("load", () => {
+        function clock() {
+          const today = new Date();
+          const hours = today.getHours();
+          const minutes = today.getMinutes();
+          const seconds = today.getSeconds();
+
+          const hour = hours < 10 ? "0" + hours : hours;
+          const minute = minutes < 10 ? "0" + minutes : minutes;
+          const second = seconds < 10 ? "0" + seconds : seconds;
+
+          const hourtime = hour > 12 ? hour - 12 : hour;
+          const AmPm = hour < 12 ? "AM" : "PM";
+
+          const monthList = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+          ];
+
+          const month = today.getMonth();
+          const year = today.getFullYear();
+          const day = today.getDate();
+
+          const date = `${monthList[month]}  - ${day}   - ${year}`;
+          const time = `${hourtime}:${minute}:${second}:${AmPm}`;
+          const dateTime = `${date} , ${time}`;
+          document.querySelector(".time").textContent = time;
+          document.querySelector(".date").textContent = date;
+        }
+        clock();
+        setInterval(clock, 1000);
+      });
+    </script>
+  </body>
+</html>
